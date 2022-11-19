@@ -1,0 +1,3 @@
+elapsed time(1) = 3775.239768 seconds
+elapsed time(2) = 2207.185797 seconds
+elapsed time(3) = 2173.939073 seconds
