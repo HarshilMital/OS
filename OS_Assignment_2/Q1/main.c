@@ -114,6 +114,6 @@ int main(int argc, char* argv[]){
     pthread_join(A, NULL); 
     pthread_join(B, NULL);
     pthread_join(C, NULL);
-    // printf("returned %d\n", m->x); 
+    
     return 0;
 }
