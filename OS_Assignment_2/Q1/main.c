@@ -86,7 +86,7 @@ int main(int argc, char* argv[]){
     struct sched_param paramB;
     struct sched_param paramC;
 
-    paramA.sched_priority = 1;
+    paramA.sched_priority = 0;
     paramB.sched_priority = 1;
     paramC.sched_priority = 1;
 
