@@ -43,6 +43,7 @@ int main()
 
     if (sys_call_status != EFAULT)
     {
+        printf("%d\n", sys_call_status);
         printf("Message : System Call 451 successfuly invoked \n");
         check_equal(src_arr, dest_arr, LEN, BRE);
     }
