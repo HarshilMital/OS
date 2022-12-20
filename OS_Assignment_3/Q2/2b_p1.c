@@ -4,9 +4,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <time.h>
 
 #define FIFO_NAME "/tmp/my_fifo"
 #define BUFFER_SIZE 20
+#define BILLION 1000000000L
 
 int main(int argc, char *argv[])
 {
@@ -46,6 +48,11 @@ int main(int argc, char *argv[])
     //     write(fd, buffer, BUFFER_SIZE);
     // }
     // int k = rand() % 45;
+    double diff;
+	struct timespec start, end;
+
+	/* measure monotonic time */
+	clock_gettime(CLOCK_MONOTONIC, &start);
     for(int k = 0; k < 50; k += 5){
         // char buffer[BUFFER_SIZE];
         if ((fd1 = open(FIFO_NAME, O_WRONLY)) < 0) {
@@ -72,6 +79,9 @@ int main(int argc, char *argv[])
         printf("max index =  %d\n", max_index);
         close(fd2);
     }
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    diff = (BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec)/(double)BILLION;
+	printf("elapsed time(A) = %lf seconds\n", (double) diff);
     
 
     return 0;

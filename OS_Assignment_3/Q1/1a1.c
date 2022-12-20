@@ -5,17 +5,16 @@
 
 pthread_mutex_t forks[5];
 
-
 void *phil(void *arg) {
     int* n = (int*)arg;
-    // printf("%d\n", arg);
+
     while(1){
 
-        // Philosopher is thinking
+
         printf("Philosopher %d is thinking\n", *n + 1);
         sleep(5);
 
-        // Try to acquire forks
+
         if (*n % 2 == 0){
             pthread_mutex_lock(&forks[*n]);
             pthread_mutex_lock(&forks[(*n + 1) % 5]);
@@ -26,7 +25,7 @@ void *phil(void *arg) {
         }
         
 
-        // Philosopher is eating
+
         printf("Philosopher %d is eating with fork %d and %d\n", *n + 1, *n + 1, *n + 2);
         sleep(5);
 

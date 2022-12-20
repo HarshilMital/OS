@@ -7,8 +7,9 @@
 #include <sys/un.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 
-
+#define BILLION 1000000000L
 
 
 #define SOCKET_PATH "/home/harshil/OS/OS_Assignment_3/socket"
@@ -49,6 +50,11 @@ int main(int argc, char *argv[]) {
       // string_list[i] = buffer;
     }
     // int k = rand() % 45;
+    double diff;
+    struct timespec start, end;
+
+    /* measure monotonic time */
+    clock_gettime(CLOCK_MONOTONIC, &start);
     for (int k = 0; k < 50; k += 5){
       for (int i = 0; i < 5; i++){
         char buffer[BUFFER_SIZE];
@@ -59,6 +65,9 @@ int main(int argc, char *argv[]) {
       read(clientfd, buffer, BUFFER_SIZE);
       printf("max index = %d\n", atoi(buffer));
   }
+  clock_gettime(CLOCK_MONOTONIC, &end);
+  diff = (BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec)/(double)BILLION;
+	printf("elapsed time = %lf seconds\n", (double) diff);
   
 
   // Close the socket

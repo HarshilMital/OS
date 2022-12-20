@@ -5,14 +5,13 @@
 #include <stdlib.h>
 
 
-int state[5];
 sem_t mutex;
 sem_t forks[5];
 sem_t bowls;
 
-void print_cur_state(){
-    printf("0:%d 1:%d 2:%d 3:%d 4:%d\n", state[0], state[1], state[2], state[3], state[4]);
-}
+// void print_cur_state(){
+//     printf("0:%d 1:%d 2:%d 3:%d 4:%d\n", state[0], state[1], state[2], state[3], state[4]);
+// }
 
 
 
@@ -22,34 +21,31 @@ void* phil(void* num)
     {
         int* i = (int*)num;
         int n = *i;
-        // printf("%d\n", n);
+
         sem_wait(&mutex);
-        // printf("%d\n", n);
         sem_wait(&bowls);
         printf("Philosopher %d acquired sauce bowl\n", n);
         sem_wait(&forks[n]);
         sem_wait(&forks[(n + 1) % 5]);
         printf("Philosopher %d acquired fork %d and fork %d\n", n, n, (n + 1) % 5);
 
-        
-
         printf("Philosopher %d is eating\n", n);
-        state[n] = 1;
-        print_cur_state();
-        sleep(5);
+        // print_cur_state();
+        sleep(2);
 
         
 
         sem_post(&forks[n]);
         sem_post(&forks[(n + 1) % 5]);
+        printf("Philosopher %d kept fork %d and fork %d\n", n, n, (n + 1) % 5);
 
         sem_post(&bowls);
-
-        sem_post(&mutex);
+        printf("Philosopher %d kept sauce bowl\n", n);
         printf("Philosopher %d is thinking\n", n);
-        state[n] = 0;
-        print_cur_state();
-        sleep(1);
+        sem_post(&mutex);
+        
+        // print_cur_state();
+        sleep(2);
     }
 }
 

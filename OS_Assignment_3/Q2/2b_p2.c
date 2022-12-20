@@ -8,6 +8,7 @@
 #define FIFO_NAME "/tmp/my_fifo"
 #define BUFFER_SIZE 20
 
+
 int main(int argc, char *argv[])
 {
     int fd1, fd2;
@@ -41,7 +42,7 @@ int main(int argc, char *argv[])
         }
         sprintf(buffer, "%d", max_index);
         write(fd2, buffer, BUFFER_SIZE);
-        printf("max index sent ")
+        // printf("max index sent ")
         close(fd2);
     }
     
