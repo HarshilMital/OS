@@ -30,7 +30,7 @@ static int __init taskstruct_1_init(void) {
 
     printk(KERN_INFO "pid -> %d \n", cur_task_struct->pid);
     printk(KERN_INFO "user_id -> %d\n", cur_task_struct->cred->uid);
-    printk(KERN_INFO "pgid -> %d\n", pid_vnr(task_pgrp(cur_task_struct))); //task_tgid_nr(current)
+    printk(KERN_INFO "pgid -> %d\n", pid_vnr(task_pgrp(cur_task_struct)));
     printk(KERN_INFO "command path -> %s\n", cur_task_struct->comm);
 
     return 0;
